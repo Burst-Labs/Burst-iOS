@@ -13,9 +13,6 @@
   <a href="https://burst.to">
     <img src="https://img.shields.io/badge/iOS%20Version-%3E%3D%2014.0-blue" alt="Minimum iOS Target">
   </a>
-<!--   <a href="https://burst.to/" style="text-decoration: none">
-    <img src="https://img.shields.io/badge/Release-1.0.0-purple" alt="Active Release">
-  </a> -->
 </p>
 
 ----------------
