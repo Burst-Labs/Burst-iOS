@@ -95,7 +95,7 @@ struct ExampleApp: App {
 
         // Retrieve the url which lead to app install
         // Returns nil if user didn't install via app clip
-        Burst.analytics.getAppClipInvocationUrl()
+        Burst.getLatestInvocationUrl()
     }
     
     var body: some Scene {
@@ -120,6 +120,11 @@ struct ExampleApp: App {
                     if invocationDomain.contains("burst.to") || invocationDomain.contains("appclip.apple.com") {
                         self.url = invocationUrl.absoluteString
                         self.showingBurstExperience = true
+
+                        // If you only want to retrieve the link data instead of presenting an experience
+                        Burst.getLinkDataForUrl(url: invocationUrl) { linkData in
+                            print(linkData)
+                        }
                     }
                 }
             }

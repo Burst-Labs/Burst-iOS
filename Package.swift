@@ -14,8 +14,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "BurstSDK",
-            url: "https://cdn.burst-app.com/sdks/BurstSDK-1.0.0.xcframework.zip",
-            checksum: "eeac1113cbd3720031c23b0dada1333c4022310e9a0ef230c5c41b3d340437b1"
+            url: "https://cdn.burst-app.com/sdks/BurstSDK-1.2.0.xcframework.zip",
+            checksum: "ea6f76269d3becfa7c2272e2a3613097d961659b6d7fcfd5b083253b304ed6c5"
         )
     ]
 )
