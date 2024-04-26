@@ -14,7 +14,7 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "BurstSDK",
-            path: "xcframeworks/BurstSDK-1.13.0.xcframework"
+            path: "xcframeworks/BurstSDK-2.0.0.xcframework"
         )
     ]
 )

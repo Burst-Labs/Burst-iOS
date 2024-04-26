@@ -47,16 +47,19 @@ struct ExampleAppClip: App {
     init() {
         Burst.initialize(
             accessKey: "YOUR_ACCESS_KEY",
-            appGroupIdentifier: "your.app.group.id"
+            appGroupIdentifier: "your.app.group.id",
+            target: .iOSAppClip
         )
     }
 
     var body: some Scene {
         WindowGroup {
-            Burst.handleAppClipExperience(
-              theme: .custom(background: .white, foreground: .white), // Optional
-              loadingIcon: "CustomLoadingIcon" // Optional
-            )
+            ContentView()
+                .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
+                    Burst.shared.handleLink(userActivity.webpageURL) { linkData in
+                        // do something with link data
+                    }
+                }
         }
     }
 }
@@ -86,48 +89,24 @@ struct ExampleApp: App {
     init() {
         Burst.initialize(
             accessKey: "YOUR_ACCESS_KEY",
-            appGroupIdentifier: "your.app.group.id"
+            appGroupIdentifier: "your.app.group.id",
+            target: .iOSApp
         )
-
-        // Track install source
-        // Displayed in analytics tab of the web dashboard
-        Burst.analytics.trackInstallSourceIfFirstLaunch()
-
-        // Retrieve the url which lead to app install
-        // Returns nil if user didn't install via app clip
-        Burst.getLatestInvocationUrl()
     }
     
     var body: some Scene {
         WindowGroup {
-            VStack {
-                if showingBurstExperience {
-                    Burst.presentExperience(
-                        invocationUrl: url,
-                        theme: .custom(background: .white, foreground: .white), // OPTIONAL
-                        loadingIcon: "CustomLoadingIcon" // OPTIONAL
-                    ) {
-                        // Callback fired when user exits
-                        self.showingBurstExperience = false
-                    }
-                } else {
-                    // Your App Code
-                }
-            }
-            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
-                // OPTIONAL: Handles displaying your app clip experience if the user already has your app installed
-                if let invocationUrl = userActivity.webpageURL, let invocationDomain = invocationUrl.host {
-                    if invocationDomain.contains("burst.to") || invocationDomain.contains("appclip.apple.com") {
-                        self.url = invocationUrl.absoluteString
-                        self.showingBurstExperience = true
-
-                        // If you only want to retrieve the link data instead of presenting an experience
-                        Burst.getLinkDataForUrl(url: invocationUrl) { linkData in
-                            print(linkData)
-                        }
+            ContentView()
+                .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
+                    Burst.shared.handleLink(userActivity.webpageURL) { linkData in
+                        // do something with linkData
                     }
                 }
-            }
+                .onAppear {
+                    if Burst.shared.transitioningFromAppClip {
+                        Burst.shared.resumeExperience()
+                    }
+                }
         }
     }
 }
