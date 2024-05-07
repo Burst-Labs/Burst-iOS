@@ -1,0 +1,98 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target arm64-apple-ios14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name BurstSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import Combine
+import Foundation
+import LinkPresentation
+import OSLog
+import Swift
+import SwiftUI
+import UIKit
+import UserNotifications
+import WebKit
+import _AVKit_SwiftUI
+import _Concurrency
+import _StoreKit_SwiftUI
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum BurstExperienceSkippedReason {
+  case invalidUrl
+  case experienceDisabled
+  public static func == (a: BurstSDK.BurstExperienceSkippedReason, b: BurstSDK.BurstExperienceSkippedReason) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol SharingProtocol {
+  static func generateShareLink(experienceId: Swift.String, context: [Swift.String : Swift.String]?, UTMs: [Swift.String : Swift.String]?) -> Foundation.URL?
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BurstAppClipDelegate : ObjectiveC.NSObject, UIKit.UIApplicationDelegate, UserNotifications.UNUserNotificationCenterDelegate {
+  @_Concurrency.MainActor(unsafe) @objc public func application(_ application: UIKit.UIApplication, didFinishLaunchingWithOptions launchOptions: [UIKit.UIApplication.LaunchOptionsKey : Any]?) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken dToken: Foundation.Data)
+  @_Concurrency.MainActor(unsafe) @objc public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, didReceive response: UserNotifications.UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
+  @objc deinit
+}
+public struct BurstTheme {
+  public static let light: BurstSDK.BurstTheme
+  public static let dark: BurstSDK.BurstTheme
+  public static func custom(background: SwiftUI.Color, foreground: SwiftUI.Color) -> BurstSDK.BurstTheme
+}
+public enum BurstTarget {
+  case iOSApp
+  case iOSAppClip
+  public static func == (a: BurstSDK.BurstTarget, b: BurstSDK.BurstTarget) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+final public class BurstEventHandler {
+  public init()
+  final public func receiveLinkData(_ handler: @escaping ([Swift.String : Swift.String]?) -> Swift.Void)
+  final public func onExperiencePresented(_ handler: @escaping () -> Swift.Void)
+  final public func onExperienceDismissed(_ handler: @escaping () -> Swift.Void)
+  final public func onExperienceSkipped(_ handler: @escaping (BurstSDK.BurstExperienceSkippedReason) -> Swift.Void)
+  final public func onError(_ handler: @escaping (Swift.String) -> Swift.Void)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class Burst {
+  public static var shared: BurstSDK.Burst {
+    get
+  }
+  @discardableResult
+  public static func initialize(accessKey: Swift.String, appGroupIdentifier: Swift.String, target: BurstSDK.BurstTarget) -> BurstSDK.Burst
+  final public var isInitialized: Swift.Bool {
+    get
+  }
+  final public var accessKey: Swift.Bool {
+    get
+  }
+  final public var appGroupIdentifier: Swift.Bool {
+    get
+  }
+  final public var target: BurstSDK.BurstTarget {
+    get
+  }
+  final public var linkURL: Foundation.URL? {
+    get
+  }
+  final public var linkData: [Swift.String : Swift.String]? {
+    get
+  }
+  final public var transitioningFromAppClip: Swift.Bool {
+    get
+  }
+  final public func generateShareLink(experienceId: Swift.String, context: [Swift.String : Swift.String]?, UTMs: [Swift.String : Swift.String]?) -> Foundation.URL?
+  final public func handleLink(_ url: Foundation.URL?, _ receiveLinkData: @escaping ([Swift.String : Swift.String]?) -> Swift.Void)
+  final public func handleLink(_ url: Foundation.URL?, handler: BurstSDK.BurstEventHandler? = nil)
+  final public func resumeExperience(handler: BurstSDK.BurstEventHandler? = nil)
+  @objc deinit
+}
+extension BurstSDK.BurstExperienceSkippedReason : Swift.Equatable {}
+extension BurstSDK.BurstExperienceSkippedReason : Swift.Hashable {}
+extension BurstSDK.BurstTarget : Swift.Equatable {}
+extension BurstSDK.BurstTarget : Swift.Hashable {}

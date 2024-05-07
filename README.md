@@ -82,9 +82,6 @@ import BurstSDK
 
 @main
 struct ExampleApp: App {
-
-    @State var url: String
-    @State var showingBurstExperience: Bool = false
     
     init() {
         Burst.initialize(

@@ -1,0 +1,4 @@
+framework module BurstSDK {
+  header "BurstSDK-Swift.h"
+  requires objc
+}
