@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-    s.name              = "BurstSDK"
-    s.version           = "2.1.0"
+    s.name              = 'BurstSDK'
+    s.version           = '2.1.1'
     s.summary           = 'iOS implementation of the Burst SDK'
     s.description       = 'Boost installs with streamlined app installation'
     s.homepage          = 'https://github.com/Burst-Labs/Burst-iOS'
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
     s.platform = :ios
     s.ios.deployment_target = '14.0'
-    s.swift_version = '5.9.0'
+    s.swift_versions = ['5.5']
 
-    s.vendored_frameworks = "xcframeworks/BurstSDK-2.1.0.xcframework"
+    s.vendored_frameworks = 'xcframeworks/*.xcframework'
 end
